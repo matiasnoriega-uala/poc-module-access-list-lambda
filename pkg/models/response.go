@@ -1,5 +1,5 @@
 package models
 
 type Response struct {
-	Groups []string `json:"groups"`
+	Groups string `json:"groups"`
 }

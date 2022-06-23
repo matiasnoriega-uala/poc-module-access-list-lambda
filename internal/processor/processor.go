@@ -15,7 +15,7 @@ type Processor interface {
 
 func (m ModuleAccessListProcessor) Process(request models.Request) (models.Response, error) {
 	var response models.Response
-	json.Unmarshal([]byte(`{"groups": ["operadorMEP","aprobadorMEP"]`), &response)
+	json.Unmarshal([]byte(`{"groups": ["operadorMEP","aprobadorMEP"]}`), &response)
 
-	return response, models.InternalError{}
+	return response, nil
 }
