@@ -9,11 +9,7 @@ import (
 
 type OktaConnect struct{}
 
-type Connector interface {
-	getUser()
-}
-
-func (o OktaConnect) GetUser(email string) (*okta.User, *okta.Response) {
+func (o OktaConnect) GetGroups(email string) ([]*okta.Group, *okta.Response) {
 	ctx, client, err := okta.NewClient(
 		context.TODO(),
 		okta.WithOrgUrl("https://dev-75708788.okta.com"),
@@ -24,11 +20,11 @@ func (o OktaConnect) GetUser(email string) (*okta.User, *okta.Response) {
 		panic(fmt.Sprintf("Error: %v\n", err))
 	}
 
-	user, resp, err := client.User.GetUser(ctx, email)
+	groups, resp, err := client.User.ListUserGroups(ctx, email)
 
 	if err != nil {
 		panic(fmt.Sprintf("Error Getting User: %v\n", err))
 	}
 
-	return user, resp
+	return groups, resp
 }
